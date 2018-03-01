@@ -93,9 +93,12 @@ export default {
   text-align left
   border-top 1px solid $color-background-d /*no*/
   padding-top 20px
+<<<<<<< HEAD
 
   .item-no-pic-title, .item-no-pic-info
     width 100%
+=======
+>>>>>>> eebe5841dd8f021cb8915378344581ccaf1c7756
 
 .desc
   font-size $font-size-medium * 2 /*px*/
