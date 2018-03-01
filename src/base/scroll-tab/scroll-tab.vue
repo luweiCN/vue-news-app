@@ -1,8 +1,13 @@
 <template>
  <div class="scroll-tab wrapper" ref="wrapper">
   <ul class="content">
+<<<<<<< HEAD
     <li v-for="(item, index) in list" :key="index" class="scroll-tab-item" @click="selectTab" :data-channel='item' ref="tab">
       {{item}}
+=======
+    <li v-for="(item, index) in list" :key="index" class="scroll-tab-item" @click="selectTab" :data-id='item.channelId' ref="tab">
+      {{item.name}}
+>>>>>>> 6bafb0857e6f30ee3ed703cea3bfd42eaac20dcf
     </li>
   </ul>
  </div>
@@ -53,7 +58,11 @@ export default {
       this.$refs.tab.forEach((v, i) => {
         removeClass(v, AVTIVE_CLASS)
       })
+<<<<<<< HEAD
       this.$emit('selectTabEv', ev.target.dataset.channel)
+=======
+      this.$emit('selectTabEv', ev.target.dataset.id)
+>>>>>>> 6bafb0857e6f30ee3ed703cea3bfd42eaac20dcf
       addClass(ev.target, AVTIVE_CLASS)
     },
     initActiveTab () {
@@ -63,7 +72,11 @@ export default {
         }
       })
       addClass(this.$refs.tab[0], AVTIVE_CLASS)
+<<<<<<< HEAD
       this.$emit('selectTabEv', this.list[0])
+=======
+      this.$emit('selectTabEv', this.list[0].channelId)
+>>>>>>> 6bafb0857e6f30ee3ed703cea3bfd42eaac20dcf
     }
   },
   watch: {

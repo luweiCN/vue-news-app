@@ -79,10 +79,10 @@ export default {
   width 100%
   overflow hidden
   line-height $font-size-large-x
-  padding-bottom 1.44rem
+  padding-bottom 54px
 
 .news-item
-  padding 0.27rem
+  padding 10px
   padding-top 0
   font-size $font-size-medium-x
 
@@ -92,7 +92,7 @@ export default {
   justify-content space-between
   text-align left
   border-top 1px solid $color-background-d
-  padding-top 0.27rem
+  padding-top 10px
 
 .desc
   font-size $font-size-medium
@@ -107,14 +107,14 @@ export default {
   -webkit-box-orient vertical
 
 .image-container
-  width 2.7rem
-  height 2.13rem
+  width 100px
+  height 80px
   overflow hidden
   border-radius 1px
 
 .image
   width 100%
-  min-height 2.13rem
+  min-height 80px
 
 .item-one-pic
   text-align left
@@ -122,24 +122,23 @@ export default {
   flex-direction row
   justify-content space-between
   border-top 1px solid $color-background-d
-  padding-top 0.27rem
+  padding-top 10px
   .text-info
     display flex
     flex-direction column
     justify-content space-between
-
-.item-no-pic-info, .item-no-pic-title
-  width 100%
+    .title
+      width 240px
 
 .item-more-pic
   text-align left
   border-top 1px solid $color-background-d
-  padding-top 0.27rem
+  padding-top 10px
   .image-container-box
     display flex
     flex-direction row
     .image-container
-      padding-right 0.27rem
+      padding-right 10px
 
 li:first-child .news
   border none

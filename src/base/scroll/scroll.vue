@@ -43,10 +43,13 @@ export default {
     direction: {
       type: String,
       default: DIRECTION_V
+<<<<<<< HEAD
     },
     bounce: {
       type: Boolean,
       default: true
+=======
+>>>>>>> 6bafb0857e6f30ee3ed703cea3bfd42eaac20dcf
     }
   },
   mounted () {
@@ -62,7 +65,10 @@ export default {
       this.scroll = new BScroll(this.$refs.wrapper, {
         probeType: this.probeType,
         click: this.click,
+<<<<<<< HEAD
         bounce: this.bounce,
+=======
+>>>>>>> 6bafb0857e6f30ee3ed703cea3bfd42eaac20dcf
         eventPassthrough: this.direction === DIRECTION_V ? DIRECTION_H : DIRECTION_V
       })
 
@@ -73,7 +79,11 @@ export default {
       }
 
       if (this.pullup) {
+<<<<<<< HEAD
         this.scroll.on('scrollEnd', (pos) => {
+=======
+        this.scroll.on('scrollEnd', () => {
+>>>>>>> 6bafb0857e6f30ee3ed703cea3bfd42eaac20dcf
           if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
             this.$emit('scrollToEnd')
           }
