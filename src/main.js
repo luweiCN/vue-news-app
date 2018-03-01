@@ -11,12 +11,8 @@ Vue.config.productionTip = false
 
 Vue.use(VueLazyLoad, {
   loading: require('common/image/default.png'),
-<<<<<<< HEAD
   error: require('common/image/error.png'),
   silent: true
-=======
-  error: require('common/image/error.png')
->>>>>>> 6bafb0857e6f30ee3ed703cea3bfd42eaac20dcf
 })
 
 /* eslint-disable no-new */
