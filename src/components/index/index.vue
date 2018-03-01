@@ -4,7 +4,7 @@
    <div class="news-list">
      <news-list :list='showList' v-if="showList.length" :loadmore='true' @needLoadMore='loadmore'></news-list>
    </div>
-   <vue-loading type="bubbles" color="#d9544e" :size="{ width: '50px', height: '50px' }" v-show="loading"></vue-loading>
+   <vue-loading type="bubbles" color="#d9544e" :size="{ width: '100px', height: '100px' }" v-show="loading"></vue-loading>
  </div>
 </template>
 

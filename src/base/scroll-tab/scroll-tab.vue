@@ -84,25 +84,25 @@ export default {
 .scroll-tab
   width 100%
   position relative
-  height 40px
+  height 80px
   .content
     position fixed
-    top 0px
+    top 0
     display flex
     flex-direction row
-    height 40px
+    height 80px
     background #fff
     z-index 10
-    box-shadow 0px 1px 5px #999999
+    box-shadow 0px 1px 5px #999999 /*no*/
     .scroll-tab-item
-      height 39px
-      line-height 40px
+      height 78px
+      line-height 80px
       white-space nowrap
-      padding 0 10px
-      font-size $font-size-medium
-      border-bottom 1px solid $color-background-d
+      padding 0 20px
+      font-size $font-size-medium * 2 /*px*/
+      border-bottom 2px solid $color-background-d
     .scroll-tab-item-active
       color $color-theme
-      border-bottom 2px solid $color-theme
-      height 38px
+      border-bottom 4px solid $color-theme
+      height 76px
 </style>
