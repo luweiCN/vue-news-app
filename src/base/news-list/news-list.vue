@@ -68,36 +68,36 @@ export default {
 @import '~common/stylus/variable'
 .title
   font-weight 500
-  font-size $font-size-medium
-  width 6.5rem
+  font-size $font-size-medium * 2 /*px*/
+  width 490px
 
 .info
-  font-size $font-size-small
-  width 6.5rem
+  font-size $font-size-small * 2 /*px*/
+  width 490px
 
 .news-list
   width 100%
   overflow hidden
-  line-height $font-size-large-x
-  padding-bottom 54px
+  line-height $font-size-large-x * 2 /*px*/
+  padding-bottom 108px
 
 .news-item
-  padding 10px
+  padding 20px
   padding-top 0
-  font-size $font-size-medium-x
+  font-size $font-size-medium-x * 2 /*px*/
 
 .item-no-pic
   display flex
   flex-direction column
   justify-content space-between
   text-align left
-  border-top 1px solid $color-background-d
-  padding-top 10px
+  border-top 1px solid $color-background-d /*no*/
+  padding-top 20px
 
 .desc
-  font-size $font-size-medium
-  max-height $font-size-large-x * 2
-  line-height $font-size-large-x
+  font-size $font-size-medium * 2 /*px*/
+  max-height $font-size-large-x * 4 /*px*/
+  line-height $font-size-large-x * 2 /*px*/
   display -webkit-box
   overflow hidden
   white-space normal
@@ -107,38 +107,38 @@ export default {
   -webkit-box-orient vertical
 
 .image-container
-  width 100px
-  height 80px
+  width 200px
+  height 160px
   overflow hidden
-  border-radius 1px
+  border-radius 1px /*no*/
 
 .image
   width 100%
-  min-height 80px
+  min-height 160px
 
 .item-one-pic
   text-align left
   display flex
   flex-direction row
   justify-content space-between
-  border-top 1px solid $color-background-d
-  padding-top 10px
+  border-top 1px solid $color-background-d /*no*/
+  padding-top 20px
   .text-info
     display flex
     flex-direction column
     justify-content space-between
     .title
-      width 240px
+      width 480px
 
 .item-more-pic
   text-align left
-  border-top 1px solid $color-background-d
-  padding-top 10px
+  border-top 1px solid $color-background-d /*no*/
+  padding-top 20px
   .image-container-box
     display flex
     flex-direction row
     .image-container
-      padding-right 10px
+      padding-right 20px
 
 li:first-child .news
   border none

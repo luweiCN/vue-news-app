@@ -7,6 +7,8 @@ import VueLazyLoad from 'vue-lazyload'
 
 import 'common/stylus/index.styl'
 
+import 'lib-flexible'
+
 Vue.config.productionTip = false
 
 Vue.use(VueLazyLoad, {

@@ -52,8 +52,8 @@ export default {
   z-index 10
   width 100%
   overflow hidden
-  height 54px
-  border-top 1px solid $color-background-d
+  height 108px
+  border-top 1px solid $color-background-d /*no*/
   .tab-container
     display flex
     flex-direction row
@@ -61,15 +61,15 @@ export default {
     align-items center
     width 100%
     background #fff
-    height 54px
+    height 108px
     .tab-item
       display flex
       flex-direction column
       .tab-icon
-        font-size 22px
-        margin-bottom 5px
+        font-size 44px /*px*/
+        margin-bottom 10px
       .tab-text
-        font-size 14px
+        font-size 24px /*px*/
     .router-link-active
       .tab-icon, .tab-text
         color $color-theme

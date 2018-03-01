@@ -14,13 +14,11 @@
     "ajv": "^6.2.0",
     "axios": "^0.18.0",
     "better-scroll": "^1.8.1",
-<<<<<<< HEAD
     "http-proxy-middleware": "^0.17.4",
     "js-md5": "^0.7.3",
     "jsonp": "^0.2.1",
+    "lib-flexible": "^0.3.2",
     "qs": "^6.5.1",
-=======
->>>>>>> 6bafb0857e6f30ee3ed703cea3bfd42eaac20dcf
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.2",
@@ -62,6 +60,7 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
+    "px2rem-loader": "^0.1.7",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
