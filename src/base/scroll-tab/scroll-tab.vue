@@ -91,13 +91,14 @@ export default {
     flex-wrap nowrap
     .scroll-tab-item
       display block
-      height 78px
+      height 80px
       line-height 80px
       white-space nowrap
       padding 0 20px
       font-size $font-size-medium * 2 /*px*/
     .scroll-tab-item-active
       color $color-theme
+      box-sizing content-box
       border-bottom 4px solid $color-theme
       height 76px
 </style>

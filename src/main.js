@@ -4,8 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueLazyLoad from 'vue-lazyload'
+import { Icon } from 'iview'
 
 import 'common/stylus/index.styl'
+import 'iview/dist/styles/iview.css'
 
 import 'lib-flexible'
 
@@ -16,6 +18,7 @@ Vue.use(VueLazyLoad, {
   error: require('common/image/error.png'),
   silent: true
 })
+Vue.component('Icon', Icon)
 
 /* eslint-disable no-new */
 new Vue({

@@ -7,7 +7,7 @@
       <scroll :data='newsList[channel]' :click='true' :pullup='true' @scrollToEnd='loadmore' ref="scroll">
         <div>
           <ul class="container">
-            <li class="news-item" v-for='(item, index) in newsList[channel]' :key='index'>
+            <router-link tag="li" :to="{name: 'newsDetail', params: {news: item, channel}}" class="news-item" v-for='(item, index) in newsList[channel]' :key='index'>
               <div class="item-no-pic news" v-if="!item.pic">
                 <p class="item-no-pic-title title">{{item.title}}</p>
                 <p class="item-no-pic-info info">{{item.src}}<span v-if="item.src">&nbsp;&nbsp;</span>{{item.time}}</p>
@@ -30,13 +30,14 @@
                   </div>
                 </div>
               </div> -->
-            </li>
+            </router-link>
           </ul>
-          <vue-loading ref="loading" type="bubbles" color="#d9544e" :size="{ width: '100px', height: '100px' }" v-show="loading"></vue-loading>
+          <vue-loading ref="loading" type="bubbles" color="#d9544e" :size="{ width: '50px', height: '50px' }" v-show="loading"></vue-loading>
         </div>
       </scroll>
+    </div>
+    <router-view></router-view>
   </div>
- </div>
 </template>
 
 <script>
@@ -132,7 +133,6 @@ export default {
   watch: {
     loading () {
       this.$refs.scroll.refresh()
-      this.$refs.scroll.scrollToElement(this.$refs.loading)
     }
   }
 }
@@ -173,6 +173,7 @@ export default {
   top 80px
   bottom 0
   width 100%
+  overflow hidden
 
 .news-item
   padding 20px

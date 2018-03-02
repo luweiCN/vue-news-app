@@ -1,10 +1,10 @@
 <template>
  <div class="bottom-tab">
    <ul class="tab-container">
-     <router-link tag="li" to="/home" class="tab-item">
-       <i class="iconfont icon-shouyeweixuanzhong tab-icon" v-show="routerName != 'home'"></i>
-       <i class="iconfont icon-shouyexuanzhong tab-icon" v-show="routerName == 'home'"></i>
-       <span class="tab-text">首页</span>
+     <router-link tag="li" to="/news" class="tab-item">
+       <i class="iconfont icon-shouyeweixuanzhong tab-icon" v-show="routerName != 'news'"></i>
+       <i class="iconfont icon-shouyexuanzhong tab-icon" v-show="routerName == 'news'"></i>
+       <span class="tab-text">新闻</span>
      </router-link>
      <router-link tag="li" to="/subscription" class="tab-item">
        <i class="iconfont icon-fenquweixuanzhong tab-icon" v-show="routerName != 'subscription'"></i>
@@ -49,7 +49,6 @@ export default {
 .bottom-tab
   position fixed
   bottom 0
-  z-index 10
   width 100%
   overflow hidden
   height 108px

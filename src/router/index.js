@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from 'components/index/index'
+import News from 'components/news/news'
 import Subscription from 'components/subscription/subscription'
 import Fav from 'components/fav/fav'
 import User from 'components/user/user'
+import NewsDetail from 'components/news-detail/news-detail'
 
 Vue.use(Router)
 
@@ -13,13 +14,20 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: Index,
-      redirect: '/home'
+      component: News,
+      redirect: '/news',
+      children: [
+        {
+          name: 'newsDetail',
+          path: '/news/detail',
+          component: NewsDetail
+        }
+      ]
     },
     {
-      path: '/home',
-      name: 'home',
-      component: Index
+      path: '/news',
+      name: 'news',
+      component: News
     },
     {
       path: '/subscription',
