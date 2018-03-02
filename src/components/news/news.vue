@@ -145,7 +145,7 @@ export default {
   top 0
   left 0
   right 0
-  bottom 108px
+  bottom 100px
   line-height $font-size-large-x * 2 /*px*/
 
 .scroll-tab

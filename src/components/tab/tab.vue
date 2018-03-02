@@ -51,8 +51,8 @@ export default {
   bottom 0
   width 100%
   overflow hidden
-  height 108px
-  border-top 1px solid $color-background-d /*no*/
+  height 100px
+  border-top 1.5px solid $color-background-d /*no*/ 
   .tab-container
     display flex
     flex-direction row
@@ -60,13 +60,13 @@ export default {
     align-items center
     width 100%
     background #fff
-    height 108px
+    height 100px
     .tab-item
       display flex
       flex-direction column
+      justify-content space-between
       .tab-icon
-        font-size 44px /*px*/
-        margin-bottom 10px
+        font-size 38px /*px*/
       .tab-text
         font-size 24px /*px*/
     .router-link-active
