@@ -1,10 +1,41 @@
 <template>
- <div class="home">
-   <scroll-tab :list='channelList' @selectTabEv="selectTab" v-if='channelList.length'></scroll-tab>
-   <div class="news-list">
-     <news-list :list='showList' v-if="showList.length" :loadmore='true' @needLoadMore='loadmore'></news-list>
-   </div>
-   <vue-loading type="bubbles" color="#d9544e" :size="{ width: '100px', height: '100px' }" v-show="loading"></vue-loading>
+  <div class="home">
+    <div class="scroll-tab">
+      <scroll-tab :list='channelList' @selectTabEv="selectTab" v-if='channelList.length'></scroll-tab>
+    </div>
+    <div class="news-list">
+      <scroll :data='newsList[channel]' :click='true' :pullup='true' @scrollToEnd='loadmore' ref="scroll">
+        <div>
+          <ul class="container">
+            <li class="news-item" v-for='(item, index) in newsList[channel]' :key='index'>
+              <div class="item-no-pic news" v-if="!item.pic">
+                <p class="item-no-pic-title title">{{item.title}}</p>
+                <p class="item-no-pic-info info">{{item.src}}<span v-if="item.src">&nbsp;&nbsp;</span>{{item.time}}</p>
+              </div>
+              <div class="item-one-pic news" v-if="item.pic">
+                <div class="text-info">
+                  <p class="item-one-pic-title title">{{item.title}}</p>
+                  <p class="info">{{item.src}}<span v-if="item.src">&nbsp;&nbsp;</span>{{item.time}}</p>
+                </div>
+                <div class="image-container">
+                  <img class="image" v-lazy='item.pic'>
+                </div>
+              </div>
+              <!-- <div class="item-more-pic news" v-if="item.havePic && item.imageurls.length > 1">
+                <p class="item-no-pic-title title">{{item.title}}</p>
+                <p class="info">{{item.source}}&nbsp;&nbsp;{{item.pubDate}}</p>
+                <div class="image-container-box">
+                  <div class="image-container" v-for='(image, num) in item.imageurls' :key='num' v-if="num < 3">
+                    <img class="image" v-lazy='image.url'>
+                  </div>
+                </div>
+              </div> -->
+            </li>
+          </ul>
+          <vue-loading ref="loading" type="bubbles" color="#d9544e" :size="{ width: '100px', height: '100px' }" v-show="loading"></vue-loading>
+        </div>
+      </scroll>
+  </div>
  </div>
 </template>
 
@@ -14,8 +45,8 @@ import { ERR_OK } from 'api/config'
 
 // components
 import ScrollTab from 'base/scroll-tab/scroll-tab'
-import NewsList from 'base/news-list/news-list'
 import VueLoading from 'vue-loading-template'
+import Scroll from 'base/scroll/scroll'
 
 const PAGE_SIZE = 15
 
@@ -33,8 +64,8 @@ export default {
   },
   components: {
     ScrollTab,
-    NewsList,
-    VueLoading
+    VueLoading,
+    Scroll
   },
   created () {
     this._getChannelList()
@@ -54,7 +85,7 @@ export default {
     _getNewsList (channel, page) {
       this.loading = true
       if (page === 1) {
-        this.showList = []
+        this.newsList[channel] = []
       }
       getNewsList(channel, page, PAGE_SIZE).then((res) => {
         let num = res.result.num
@@ -72,7 +103,6 @@ export default {
           } else {
             this.isEnd[channel] = true
           }
-          this.showList = this.newsList[channel]
         }
 
         this.loading = false
@@ -88,8 +118,6 @@ export default {
       this.channel = channel
       if (!this.newsList[channel].length) {
         this._getNewsList(channel, this.page[channel])
-      } else {
-        this.showList = this.newsList[channel]
       }
     },
     loadmore () {
@@ -102,19 +130,112 @@ export default {
     }
   },
   watch: {
-    newsList: function (val, oldVal) {
-      if (val[this.channelId]) {
-        this.showList = val[this.channelId]
-      }
-    },
-    channelId: function (val, oldVal) {
-      if (this.newsList[val]) {
-        this.showList = this.newsList[val]
-      }
+    loading () {
+      this.$refs.scroll.refresh()
+      this.$refs.scroll.scrollToElement(this.$refs.loading)
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+@import '~common/stylus/variable'
+.home
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 108px
+  line-height $font-size-large-x * 2 /*px*/
+
+.scroll-tab
+  position fixed
+  height 80px
+  top 0
+  left 0
+  right 0
+  z-index 10
+  background #fff
+  box-shadow 0px 1px 5px #999999 /*no*/
+  border-bottom 2px solid $color-background-d
+
+.title
+  font-weight 500
+  font-size $font-size-medium * 2 /*px*/
+  width 490px
+
+.info
+  font-size $font-size-small * 2 /*px*/
+  width 490px
+
+.news-list
+  position absolute
+  top 80px
+  bottom 0
+  width 100%
+
+.news-item
+  padding 20px
+  padding-top 0
+  font-size $font-size-medium-x * 2 /*px*/
+
+.item-no-pic
+  display flex
+  flex-direction column
+  justify-content space-between
+  text-align left
+  border-top 1px solid $color-background-d /*no*/
+  padding-top 20px
+
+  .item-no-pic-title, .item-no-pic-info
+    width 100%
+
+.desc
+  font-size $font-size-medium * 2 /*px*/
+  max-height $font-size-large-x * 4 /*px*/
+  line-height $font-size-large-x * 2 /*px*/
+  display -webkit-box
+  overflow hidden
+  white-space normal
+  text-overflow: ellipsis
+  word-wrap break-word
+  -webkit-line-clamp 2
+  -webkit-box-orient vertical
+
+.image-container
+  width 200px
+  height 160px
+  overflow hidden
+  border-radius 1px /*no*/
+
+.image
+  width 100%
+  min-height 160px
+
+.item-one-pic
+  text-align left
+  display flex
+  flex-direction row
+  justify-content space-between
+  border-top 1px solid $color-background-d /*no*/
+  padding-top 20px
+  .text-info
+    display flex
+    flex-direction column
+    justify-content space-between
+    .title
+      width 480px
+
+.item-more-pic
+  text-align left
+  border-top 1px solid $color-background-d /*no*/
+  padding-top 20px
+  .image-container-box
+    display flex
+    flex-direction row
+    .image-container
+      padding-right 20px
+
+li:first-child .news
+  border none
 </style>

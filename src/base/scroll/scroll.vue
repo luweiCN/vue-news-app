@@ -1,5 +1,5 @@
 <template>
-  <div ref="wrapper">
+  <div class="wrapper" ref="wrapper">
     <slot></slot>
   </div>
 </template>
@@ -113,5 +113,6 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-
+.wrapper
+  height 100%
 </style>

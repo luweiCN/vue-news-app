@@ -1,11 +1,11 @@
 <template>
- <div class="scroll-tab wrapper" ref="wrapper">
+<div class="wrapper" ref="wrapper">
   <ul class="content">
     <li v-for="(item, index) in list" :key="index" class="scroll-tab-item" @click="selectTab" :data-channel='item' ref="tab">
-      {{item}}
+    {{item}}
     </li>
   </ul>
- </div>
+</div>
 </template>
 
 <script>
@@ -43,10 +43,10 @@ export default {
         scrollX: true,
         scrollY: false,
         probeType: 1,
-        bounce: false,
         momentum: true,
         HWCompositing: true,
-        click: true
+        click: true,
+        bounce: true
       })
     },
     selectTab (ev) {
@@ -81,26 +81,21 @@ export default {
 <style lang="stylus" scoped>
 @import '~common/stylus/variable';
 
-.scroll-tab
-  width 100%
-  position relative
-  height 80px
+.wrapper
   .content
-    position fixed
-    top 0
-    display flex
+    clear both
+    display inline-flex
     flex-direction row
     height 80px
     background #fff
-    z-index 10
-    box-shadow 0px 1px 5px #999999 /*no*/
+    flex-wrap nowrap
     .scroll-tab-item
+      display block
       height 78px
       line-height 80px
       white-space nowrap
       padding 0 20px
       font-size $font-size-medium * 2 /*px*/
-      border-bottom 2px solid $color-background-d
     .scroll-tab-item-active
       color $color-theme
       border-bottom 4px solid $color-theme
