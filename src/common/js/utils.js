@@ -14,3 +14,16 @@ export function formatterDateTime () {
   (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
   return datetime
 }
+
+export function debounce (func, delay) {
+  let timer
+
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, delay)
+  }
+}

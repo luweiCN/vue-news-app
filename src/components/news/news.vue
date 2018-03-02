@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div class="search" @click='goSearchNews'>
+      <search-box @search='searchNews' :goBack='true'></search-box>
+    </div>
     <div class="scroll-tab">
       <scroll-tab :list='channelList' @selectTabEv="selectTab" v-if='channelList.length'></scroll-tab>
     </div>
@@ -48,6 +51,7 @@ import { ERR_OK } from 'api/config'
 import ScrollTab from 'base/scroll-tab/scroll-tab'
 import VueLoading from 'vue-loading-template'
 import Scroll from 'base/scroll/scroll'
+import SearchBox from 'base/search-box/search-box'
 
 const PAGE_SIZE = 15
 
@@ -66,7 +70,8 @@ export default {
   components: {
     ScrollTab,
     VueLoading,
-    Scroll
+    Scroll,
+    SearchBox
   },
   created () {
     this._getChannelList()
@@ -128,6 +133,12 @@ export default {
       if (!this.isEnd[this.channel]) {
         this._getNewsList(this.channel, this.page[this.channel])
       }
+    },
+    searchNews (key) {
+      console.log(key)
+    },
+    goSearchNews () {
+      this.$router.push('/news/search')
     }
   },
   watch: {
@@ -151,7 +162,7 @@ export default {
 .scroll-tab
   position fixed
   height 80px
-  top 0
+  top 85px
   left 0
   right 0
   z-index 10
@@ -170,7 +181,7 @@ export default {
 
 .news-list
   position absolute
-  top 80px
+  top 170px
   bottom 0
   width 100%
   overflow hidden
@@ -239,4 +250,8 @@ export default {
 
 li:first-child .news
   border none
+
+.search
+  height 90px
+  background #fff
 </style>

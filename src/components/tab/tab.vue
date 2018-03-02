@@ -52,7 +52,7 @@ export default {
   width 100%
   overflow hidden
   height 100px
-  border-top 1.5px solid $color-background-d /*no*/ 
+  border-top 1.5px solid $color-background-d /*no*/
   .tab-container
     display flex
     flex-direction row

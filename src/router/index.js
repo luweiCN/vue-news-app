@@ -5,6 +5,7 @@ import Subscription from 'components/subscription/subscription'
 import Fav from 'components/fav/fav'
 import User from 'components/user/user'
 import NewsDetail from 'components/news-detail/news-detail'
+import SearchNews from 'components/search-news/search-news'
 
 Vue.use(Router)
 
@@ -21,6 +22,11 @@ export default new Router({
           name: 'newsDetail',
           path: '/news/detail',
           component: NewsDetail
+        },
+        {
+          name: 'search',
+          path: '/news/search',
+          component: SearchNews
         }
       ]
     },
