@@ -1,13 +1,21 @@
 <template>
   <div class="search-box">
-    <icon type="ios-search-strong" class="icon-search"></icon>
-    <input ref="query" v-model="query" class="box"
-    @blur="blur"
-    @keyup.enter="search"
-    @focus="focus"
-    :placeholder="placeholder"
-    :disabled='disable'/>
-    <icon type="close-circled" class="close-circled" v-show="inputBlur" @click="blur"></icon>
+    <div class="go-back" @click="goBackHander" v-if='goBack'>
+      <icon type="ios-arrow-back"></icon>
+    </div>
+    <div class="container">
+      <icon type="ios-search-strong" class="icon-search"></icon>
+      <input ref="query" v-model="query" class="box"
+      @blur="blur"
+      @focus="focus"
+      @keyup.enter="search"
+      @input="type"
+      :placeholder="placeholder"
+      :disabled='disable'/>
+      <div @click="cancelSearch"  class="close-circled-box" v-show='inputBlur'>
+        <icon type="close-circled" class="close-circled"></icon>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -24,7 +32,7 @@ export default {
       type: Boolean,
       default: false
     },
-    // 当搜索框失去焦点时是否需要回到上个路由
+    // 返回按钮
     goBack: {
       type: Boolean,
       default: false
@@ -45,17 +53,33 @@ export default {
     },
     blur () {
       this.$refs.query.blur()
-      this.inputBlur = false
-      this.query = ''
-      if (this.goBack) {
-        this.$router.go(-1)
+      if (this.query !== '') {
+        this.inputBlur = true
+      } else {
+        this.inputBlur = false
+      }
+    },
+    type () {
+      if (this.query !== '') {
+        this.inputBlur = true
+      } else {
+        this.inputBlur = false
       }
     },
     focus () {
-      this.inputBlur = true
+      if (this.query !== '') {
+        this.inputBlur = true
+      }
     },
     search () {
       this.$emit('search', this.query)
+    },
+    cancelSearch () {
+      console.log(1)
+      this.query = ''
+    },
+    goBackHander () {
+      this.$router.go(-1)
     }
   },
   created () {
@@ -77,23 +101,44 @@ export default {
     padding: 0 12px
     height: 90px
     background: #fff
+    justify-content space-between
     .icon-search
       font-size: 48px /*px*/
-      color: $color-background
+      color: $color-background-d
+      position absolute
+      left 12px
     .box
-      flex: 1
-      margin: 0 10px
+      display block
+      width 100%
       line-height: 36px
       background: #EBEBEB
       color: $color-content-title
       font-size: $font-size-medium * 2
       outline: 0
-      padding 10px
+      padding 10px 10px 10px 58px
       border-radius 6px
       transition all 30s
       &::placeholder
         color: $color-dialog-background
-    .close-circled
+    .close-circled-box
       font-size: 36px /*px*/
       color: $color-background-d
+      position absolute
+      right 12px
+      display flex
+      align-items center
+
+.go-back
+    font-size 50px
+    float left
+    width 50px
+    text-align left
+    padding 0 40px 0 10px
+
+.container
+  flex 1
+  position relative
+  display flex
+  flex-direction row
+  align-items center
 </style>

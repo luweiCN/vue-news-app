@@ -39,13 +39,16 @@
         </div>
       </scroll>
     </div>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import { getNewsList, getChannelList } from 'api/news'
+import { getNewsList, getChannelList, searchNews } from 'api/news'
 import { ERR_OK } from 'api/config'
+import { setSearchHistory } from 'common/js/search-history'
 
 // components
 import ScrollTab from 'base/scroll-tab/scroll-tab'
@@ -135,7 +138,12 @@ export default {
       }
     },
     searchNews (key) {
-      console.log(key)
+      setSearchHistory(key)
+      searchNews(key).then((res) => {
+        if (parseInt(res.status) === ERR_OK) {
+          console.log(res)
+        }
+      })
     },
     goSearchNews () {
       this.$router.push('/news/search')
@@ -185,6 +193,7 @@ export default {
   bottom 0
   width 100%
   overflow hidden
+  padding-bottom 100px
 
 .news-item
   padding 20px

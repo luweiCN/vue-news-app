@@ -27,3 +27,22 @@ export function debounce (func, delay) {
     }, delay)
   }
 }
+
+// 验证字符串是否含有特殊字符，包括空格
+export function hasSpecailchar (str) {
+  let regEn = /[`~!@#$%^&*()_+<>?:"{},./;'\s[\]]/im
+  let regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】\s[\]]/im
+
+  if (regEn.test(str) || regCn.test(str)) {
+    return true
+  }
+  return false
+}
+
+export function loacalStorage (key, val = null) {
+  if (val === null) {
+    return JSON.parse(localStorage.getItem(key) || '[]')
+  } else {
+    localStorage.setItem(key, JSON.stringify(val))
+  }
+}

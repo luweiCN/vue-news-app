@@ -28,6 +28,9 @@ export default {
   beforeMount () {
     this.news = this.$route.params.news
     this.channel = this.$route.params.channel
+    if (!this.news) {
+      this.$router.go(-1)
+    }
   },
   components: {
     Scroll,
@@ -65,7 +68,7 @@ export default {
       -webkit-box-orient vertical
       word-break break-all
       padding 30px 30px 20px
-      font-weight 500
+      font-weight 700
       text-align justify
       background #fff
     .news-info
@@ -75,7 +78,7 @@ export default {
       padding 0 30px 30px
       margin-bottom 48px
       background #fff
-      font-size $font-size-small-s /*px*/
+      font-size $font-size-small-s * 2 /*px*/
       color #888
       line-height 24px /*px*/
 
