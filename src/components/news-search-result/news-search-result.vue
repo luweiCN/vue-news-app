@@ -45,7 +45,6 @@ export default {
       searchNews(this.key).then((res) => {
         if (parseInt(res.status) === ERR_OK) {
           this.searchResult = res.result.list
-          console.log(this.searchResult)
         }
       })
     }
