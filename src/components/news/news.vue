@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getNewsList, getChannelList, searchNews } from 'api/news'
+import { getNewsList, getChannelList } from 'api/news'
 import { ERR_OK } from 'api/config'
 import { setSearchHistory } from 'common/js/search-history'
 

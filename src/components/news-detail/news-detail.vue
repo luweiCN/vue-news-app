@@ -3,7 +3,7 @@
     <div class="news-detail">
       <app-head :title='"新闻 / " + channel'></app-head>
       <div class="news-wrapper">
-        <scroll :data='news'>
+        <scroll :data='news' ref='news'>
           <div class="news">
             <h2 class="news-title" v-html="news.title"></h2>
             <p class="news-info">{{news.src}}<span v-if="news.src">&nbsp;&nbsp;</span>{{news.time}}</p>
@@ -40,6 +40,11 @@ export default {
     next(vm => {
       vm.news = vm.$route.params.news
     })
+  },
+  watch: {
+    news () {
+      this.$refs.news.scrollTo(0, 0, 0)
+    }
   }
 }
 </script>

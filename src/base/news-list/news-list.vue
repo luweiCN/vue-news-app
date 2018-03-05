@@ -77,6 +77,9 @@ export default {
       } else {
         this.loading = false
       }
+    },
+    channel () {
+      this.$refs.scroll.scrollTo(0, 0, 0)
     }
   },
   components: {
