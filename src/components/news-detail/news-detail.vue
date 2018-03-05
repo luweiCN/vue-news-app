@@ -3,7 +3,7 @@
     <div class="news-detail">
       <app-head :title='"新闻 / " + channel'></app-head>
       <div class="news-wrapper">
-        <scroll>
+        <scroll :data='news'>
           <div class="news">
             <h2 class="news-title" v-html="news.title"></h2>
             <p class="news-info">{{news.src}}<span v-if="news.src">&nbsp;&nbsp;</span>{{news.time}}</p>
@@ -35,6 +35,11 @@ export default {
   components: {
     Scroll,
     AppHead
+  },
+  beforeRouteEnter: (to, from, next) => {
+    next(vm => {
+      vm.news = vm.$route.params.news
+    })
   }
 }
 </script>
@@ -88,4 +93,12 @@ export default {
   bottom 0
   width 100%
   z-index -1
+
+.news-content p
+  margin 0 30px 48px
+  font-size $font-size-content-p /*px*/
+  color #1a1a1a
+  line-height 60px /*px*/
+  word-break normal
+  text-align justify
 </style>

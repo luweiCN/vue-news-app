@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="search" @click='goSearchNews'>
-      <search-box @search='searchNews' :goBack='true'></search-box>
+      <search-box @search='searchNews' :goBack='goBack' ref="search"></search-box>
     </div>
     <div class="scroll-tab">
       <scroll-tab :list='channelList' @selectTabEv="selectTab" v-if='channelList.length'></scroll-tab>
@@ -36,7 +36,8 @@ export default {
       page: {},
       channel: '',
       showList: [],
-      isEnd: {}
+      isEnd: {},
+      goBack: false
     }
   },
   components: {
@@ -104,12 +105,8 @@ export default {
       }
     },
     searchNews (key) {
+      this.$router.push('/news/search/' + key)
       setSearchHistory(key)
-      searchNews(key).then((res) => {
-        if (parseInt(res.status) === ERR_OK) {
-          console.log(res)
-        }
-      })
     },
     goSearchNews () {
       this.$router.push('/news/search')

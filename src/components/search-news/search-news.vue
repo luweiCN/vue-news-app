@@ -1,38 +1,31 @@
 <template>
  <transition name='slide'>
     <div class="search-news">
-      <div class="search-history">
-        <h2 class="search-title">搜索历史</h2>
-        <ul class="history-box">
-          <li class="history">
-            <span class="history-text">周杰伦</span>
-            <div class="delete-history">
-              <icon type="ios-close-empty"></icon>
-            </div>
-          </li>
-          <li class="history">
-            <span class="history-text">周杰伦</span>
-            <div class="delete-history">
-              <icon type="ios-close-empty"></icon>
-            </div>
-          </li>
-          <li class="history">
-            <span class="history-text">周杰伦</span>
-            <div class="delete-history">
-              <icon type="ios-close-empty"></icon>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="hot-news">
-        <h2 class="search-title">热门搜索</h2>
-        <ul class="hot-box">
-          <li class="hot" v-for='(hot, index) in hots' :key="index">
-            <span class="hot-index">{{index + 1 + '.'}}</span>
-            <span class="hot-text">{{hot}}</span>
-          </li>
-        </ul>
-      </div>
+      <scroll :click='true' :data='{historyList, hots}'>
+        <div>
+          <div class="search-history" v-if='historyList.length'>
+            <h2 class="search-title">搜索历史</h2>
+            <ul class="history-box">
+              <li class="history" v-for="(item, index) in historyList" :key='index'>
+                <span class="history-text" @click="searchHistory(item)">{{item}}</span>
+                <div class="delete-history" @click='deleteHistory(item)'>
+                  <icon type="ios-close-empty"></icon>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="hot-news">
+            <h2 class="search-title">热门搜索</h2>
+            <ul class="hot-box">
+              <li class="hot" v-for='(hot, index) in hots' :key="index" @click="searchHot(hot)">
+                <span class="hot-index">{{index + 1 + '.'}}</span>
+                <span class="hot-text">{{hot}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </scroll>
+      <router-view></router-view>
     </div>
   </transition>
 </template>
@@ -41,14 +34,19 @@
 import { getHot } from 'api/news'
 import { ERR_OK } from 'api/config'
 import { hasSpecailchar } from 'common/js/utils'
+import { setSearchHistory, getSearchHistory, deleteSearchHistory } from 'common/js/search-history'
+
+import Scroll from 'base/scroll/scroll'
 export default {
   data () {
     return {
-      hots: []
+      hots: [],
+      historyList: []
     }
   },
   created () {
     this.getHotNewsKey()
+    this.historyList = getSearchHistory()
   },
   methods: {
     getHotNewsKey () {
@@ -61,7 +59,7 @@ export default {
     normalizeHotKeys (list = []) {
       let res = []
       list.forEach((item) => {
-        if (!hasSpecailchar(item.title) && item.title.length <= 25 && res.length <= 10) {
+        if (!hasSpecailchar(item.title) && item.title.length <= 21 && res.length < 10) {
           res.push(item.title)
         }
         if (res.length >= 10) {
@@ -70,10 +68,38 @@ export default {
       })
 
       return res
+    },
+    _search (key) {
+      this.$router.push('/news/search/' + key)
+    },
+    searchHistory (key) {
+      this._search(key)
+      setSearchHistory(key)
+      this.historyList = getSearchHistory()
+    },
+    searchHot (key) {
+      this._search(key)
+    },
+    deleteHistory (key) {
+      deleteSearchHistory(key)
+      this.historyList = getSearchHistory()
     }
   },
   components: {
-
+    Scroll
+  },
+  beforeRouteEnter: (to, from, next) => {
+    next((vm) => {
+      vm.historyList = getSearchHistory()
+      vm.$parent.goBack = true
+    })
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$parent.$refs.search.query = ''
+    this.$parent.goBack = false
+    this.$parent.$refs.search.blur()
+    this.historyList = getSearchHistory()
+    next()
   }
 }
 </script>
@@ -110,8 +136,8 @@ export default {
   bottom 0
   z-index 100
   width 100%
-  height 100%
-  padding 20px 30px
+  // height 100%
+  padding 20px 30px 0 30px
   background rgba(255, 255, 255, 1)
   overflow hidden
 
@@ -124,20 +150,25 @@ export default {
 .history-box
   display flex
   flex-direction row
-  flex-wrap warp
+  flex-wrap wrap
 
 .history
-  height 50px
   display flex
   align-items center
   justify-content space-between
-  padding 0 10px 0 25px
+  padding 0
   background #F6F6F6
-  border-radius 50px
+  border-radius 150px
   margin 0 20px 20px 0
+  word-break keep-all
+  text-overflow ellipsis
+  overflow hidden
 
 .history-text
-  margin-right 5px
+  display inline-block
+  padding 0 20px
+  line-height 50px
+  max-width 550px
 
 .delete-history
   width 50px
@@ -170,7 +201,7 @@ export default {
 
 .hot-index
   display inline-block
-  width 30px
+  width 40px
   font-size 26px
 .hot-text
   font-size 26px

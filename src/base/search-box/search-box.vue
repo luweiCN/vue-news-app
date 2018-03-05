@@ -12,7 +12,7 @@
       @input="type"
       :placeholder="placeholder"
       :disabled='disable'/>
-      <div @click="cancelSearch"  class="close-circled-box" v-show='inputBlur'>
+      <div @click="clear"  class="close-circled-box" v-show='inputBlur'>
         <icon type="close-circled" class="close-circled"></icon>
       </div>
     </div>
@@ -47,6 +47,7 @@ export default {
   methods: {
     clear () {
       this.query = ''
+      this.inputBlur = false
     },
     setQuery (query) {
       this.query = query
@@ -73,10 +74,6 @@ export default {
     },
     search () {
       this.$emit('search', this.query)
-    },
-    cancelSearch () {
-      console.log(1)
-      this.query = ''
     },
     goBackHander () {
       this.$router.go(-1)

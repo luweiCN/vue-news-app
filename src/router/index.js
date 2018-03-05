@@ -6,6 +6,7 @@ import Fav from 'components/fav/fav'
 import User from 'components/user/user'
 import NewsDetail from 'components/news-detail/news-detail'
 import SearchNews from 'components/search-news/search-news'
+import NewsSearchResult from 'components/news-search-result/news-search-result'
 
 Vue.use(Router)
 
@@ -26,7 +27,14 @@ export default new Router({
         {
           name: 'search',
           path: '/news/search',
-          component: SearchNews
+          component: SearchNews,
+          children: [
+            {
+              path: '/news/search/:key',
+              name: 'NewsSearchResult',
+              component: NewsSearchResult
+            }
+          ]
         }
       ]
     },
