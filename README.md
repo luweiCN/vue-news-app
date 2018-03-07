@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+### 线上预览地址：https://luweicn.github.io/vue-news-app/dist
+
 ## Build Setup
 
 ``` bash
