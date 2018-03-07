@@ -58,6 +58,8 @@ export default {
           this.channelList = res.result
           this.generateParams(this.channelList)
         }
+      }).catch(err => {
+        console.log(err)
       })
     },
     _getNewsList (channel, page) {
